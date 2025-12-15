@@ -14,6 +14,9 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('/logout', [AuthController::class, 'logout']);
+    Route::get('/list-iklan', [IklanController::class, 'index']);
+    Route::get('/list-kalangan', [KalanganController::class, 'index']);
+    Route::get('/list-webinar', [WebinarController::class, 'index']);
 
     Route::middleware('admin')->get('/admin', function () {
         return response()->json([
@@ -27,19 +30,19 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 
 Route::middleware(['auth:sanctum', 'admin'])->group(function () {
-    Route::get('/list-iklan', [IklanController::class, 'index']);
+    // Route::get('/list-iklan', [IklanController::class, 'index']);
     Route::post('/create-iklan', [IklanController::class, 'store']);
     Route::get('/detail-iklan/{id}', [IklanController::class, 'show']);
     Route::post('/edit-iklan/{id}', [IklanController::class, 'update']);
     Route::delete('/delete-iklan/{id}', [IklanController::class, 'destroy']);
 
-    Route::get('/list-kalangan', [KalanganController::class, 'index']);
+    // Route::get('/list-kalangan', [KalanganController::class, 'index']);
     Route::post('/create-kalangan', [KalanganController::class, 'store']);
     Route::get('/detail-kalangan/{id}', [KalanganController::class, 'show']);
     Route::post('/edit-kalangan/{id}', [KalanganController::class, 'update']);
     Route::delete('/delete-kalangan/{id}', [KalanganController::class, 'destroy']);
 
-    Route::get('/list-webinar', [WebinarController::class, 'index']);
+    // Route::get('/list-webinar', [WebinarController::class, 'index']);
     Route::post('/create-webinar', [WebinarController::class, 'store']);
     Route::get('/detail-webinar/{id}', [WebinarController::class, 'show']);
     Route::post('/edit-webinar/{id}', [WebinarController::class, 'update']);
@@ -52,9 +55,9 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
 Route::middleware(['auth:sanctum', 'role.member'])->group(function () {
 
     Route::get('/pendaftaran', [PesertaPendaftaranController::class, 'index']);
-    Route::get('/list-iklan', [IklanController::class, 'index']);
-    Route::get('/list-kalangan', [KalanganController::class, 'index']);
-    Route::get('/list-webinar', [WebinarController::class, 'index']);
+    // Route::get('/list-iklan', [IklanController::class, 'index']);
+    // Route::get('/list-kalangan', [KalanganController::class, 'index']);
+    // Route::get('/list-webinar', [WebinarController::class, 'index']);
     Route::post('/pendaftaran', [PesertaPendaftaranController::class, 'store']);
     Route::get('/pendaftaran-saya', [PesertaPendaftaranController::class, 'listUser']);
 });
