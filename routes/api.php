@@ -46,10 +46,15 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
     Route::delete('/delete-webinar/{id}', [WebinarController::class, 'destroy']);
 
     Route::get('/dashboard', [DashboardController::class, 'index']);
+    Route::get('/pendaftaran', [PesertaPendaftaranController::class, 'listAll']);
 });
 
 Route::middleware(['auth:sanctum', 'role.member'])->group(function () {
 
     Route::get('/pendaftaran', [PesertaPendaftaranController::class, 'index']);
+    Route::get('/list-iklan', [IklanController::class, 'index']);
+    Route::get('/list-kalangan', [KalanganController::class, 'index']);
+    Route::get('/list-webinar', [WebinarController::class, 'index']);
     Route::post('/pendaftaran', [PesertaPendaftaranController::class, 'store']);
+    Route::get('/pendaftaran-saya', [PesertaPendaftaranController::class, 'listUser']);
 });

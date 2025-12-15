@@ -58,4 +58,21 @@ class PesertaPendaftaranController extends Controller
     {
         return PesertaPendaftaran::where('user_id', auth()->id())->get();
     }
+
+    public function listUser()
+    {
+        $data = PesertaPendaftaran::where('user_id', auth()->id())
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return response()->json($data);
+    }
+
+
+    public function listAll()
+    {
+        $data = PesertaPendaftaran::orderBy('created_at', 'desc')->get();
+
+        return response()->json($data);
+    }
 }
