@@ -7,9 +7,15 @@ use Illuminate\Http\Request;
 
 class WebinarController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return response()->json(Webinar::all());
+        $search = $request->query('search');
+
+        $webinar = Webinar::when($search, function ($query, $search) {
+            $query->where('nama_webinar', 'like', '%' . $search . '%');
+        })->get();
+
+        return response()->json($webinar);
     }
 
     public function store(Request $request)

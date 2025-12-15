@@ -7,9 +7,15 @@ use Illuminate\Http\Request;
 
 class IklanController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return Iklan::all();
+        $search = $request->query('search');
+
+        $iklan = Iklan::when($search, function ($query, $search) {
+            $query->where('nama_iklan', 'like', '%' . $search . '%');
+        })->get();
+
+        return response()->json($iklan);
     }
 
     public function store(Request $request)

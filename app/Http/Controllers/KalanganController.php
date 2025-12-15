@@ -7,9 +7,15 @@ use Illuminate\Http\Request;
 
 class KalanganController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return response()->json(Kalangan::all());
+        $search = $request->query('search');
+
+        $kalangan = Kalangan::when($search, function ($query, $search) {
+            $query->where('nama_kalangan', 'like', '%' . $search . '%');
+        })->get();
+
+        return response()->json($kalangan);
     }
 
     public function store(Request $request)
