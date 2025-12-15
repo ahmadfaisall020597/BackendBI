@@ -13,10 +13,13 @@ class KalanganController extends Controller
 
         $kalangan = Kalangan::when($search, function ($query, $search) {
             $query->where('nama_kalangan', 'like', '%' . $search . '%');
-        })->get();
+        })
+            ->orderBy('created_at', 'desc')
+            ->paginate(5);
 
         return response()->json($kalangan);
     }
+
 
     public function store(Request $request)
     {

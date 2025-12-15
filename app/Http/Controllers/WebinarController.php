@@ -13,10 +13,13 @@ class WebinarController extends Controller
 
         $webinar = Webinar::when($search, function ($query, $search) {
             $query->where('nama_webinar', 'like', '%' . $search . '%');
-        })->get();
+        })
+            ->orderBy('created_at', 'desc')
+            ->paginate(5);
 
         return response()->json($webinar);
     }
+
 
     public function store(Request $request)
     {

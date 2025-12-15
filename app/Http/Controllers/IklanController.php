@@ -13,10 +13,13 @@ class IklanController extends Controller
 
         $iklan = Iklan::when($search, function ($query, $search) {
             $query->where('nama_iklan', 'like', '%' . $search . '%');
-        })->get();
+        })
+            ->orderBy('created_at', 'desc')
+            ->paginate(5);
 
         return response()->json($iklan);
     }
+
 
     public function store(Request $request)
     {
