@@ -75,4 +75,16 @@ class PesertaPendaftaranController extends Controller
 
         return response()->json($data);
     }
+
+    public function showListPendaftaranAdmin(Request $request) {
+        $search = $request->query('search');
+
+        $listPendaftaranAdmin = PesertaPendaftaran::when($search, function ($query, $search){
+            $query->where('nama_peserta', 'like', '%' . $search . '%');
+        })
+            ->orderBy('created_at', 'desc')
+            ->paginate(5);
+
+            return response()->json($listPendaftaranAdmin);
+    }
 }

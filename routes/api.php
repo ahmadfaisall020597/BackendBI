@@ -50,6 +50,7 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'index']);
     Route::get('/pendaftaran', [PesertaPendaftaranController::class, 'listAll']);
+    Route::get('/list-pendaftaran', [PesertaPendaftaranController::class, 'showListPendaftaranAdmin']);
 });
 
 Route::middleware(['auth:sanctum', 'role.member'])->group(function () {
